@@ -7,6 +7,8 @@ package showdown;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import showdown.Player.BasesOnHit;
+
 /**
  *
  * @author mikebud
@@ -20,59 +22,29 @@ public class Showdown {
 	public int battle(Player currentPitcher, Player currentBatter, int outs) {
 		int bases = 0;
 		int outcome;
-
+		BasesOnHit baseOnHit;
+		
 		System.out.println(currentPitcher.getName() + " is pitching against " + currentBatter.getName());
 
 		outcome = rollDice(20, 1, currentPitcher.getName());
 		// outcome = 5; //debug
-
+		System.out.println("Current batters on base is " + currentBatter.getOnBase());
 		if (outcome <= currentBatter.getOnBase()) {
 			System.out.println(currentBatter.getName() + "'s Advantage");
 			int bOutcome = rollDice(20, 1, currentBatter.getName());
 			// int bOutcome = 20; //debug hit
 
-			if (bOutcome <= currentBatter.getFlyOut()) {
-				bases = 0;
-				System.out.println("You're out!!! (" + outs + ")");
-
-			} else if (bOutcome <= currentBatter.getSingle()) {
-				System.out.println("You're safe at first.");
-				bases = 1;
-
-			} else if (bOutcome <= currentBatter.getTwoBagger()) {
-				System.out.println("Stand up double!!");
-				bases = 2;
-
-			} else if (bOutcome <= currentBatter.getTriple()) {
-				System.out.println("He slides into third!!");
-				bases = 3;
-
-			} else {
-				System.out.println("This guy is socking dingers!!!");
-				bases = 4;
-			}
+			baseOnHit = currentBatter.playerStats.floorEntry(bOutcome).getValue();
+			bases = baseOnHit.getValue();
+			System.out.println("Bases on hit is " + bases);
 
 		} else {
 			System.out.println(currentPitcher.getName() + "'s Advantage");
 			int pOutcome = rollDice(20, 1, currentBatter.getName());
-			// int bOutcome = 2; //debug hit
+			// int pOutcome = 2; //debug hit
 
-			if (pOutcome <= currentPitcher.getFlyOut()) {
-				bases = 0;
-				System.out.println("You're out!!! (" + outs + ")");
-
-			} else if (pOutcome <= currentPitcher.getSingle()) {
-				System.out.println("You're safe at first.");
-				bases = 1;
-
-			} else if (pOutcome <= currentPitcher.getTwoBagger()) {
-				System.out.println("Stand up double!!");
-				bases = 2;
-
-			} else {
-				System.out.println("This guy is socking dingers!!!");
-				bases = 4;
-			}
+			baseOnHit = currentPitcher.playerStats.floorEntry(pOutcome).getValue();
+			bases = baseOnHit.getValue();
 		}
 		System.out.println(currentBatter.getName() + " advanced " + bases + " base(s)");
 		return bases;
