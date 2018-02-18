@@ -17,7 +17,7 @@ public class StatSheet {
 		for (int i = 0; i < homeTeam.size(); i++) {
 			
 			String nextName = homeTeam.get(i).getName();
-			nextName = bufferNames(nextName);
+			nextName = bufferNames(nextName,20);
 			
 			int rbis = homeTeam.get(i).getRbis();
 			String sRbis = setUpRbis(rbis);
@@ -29,12 +29,13 @@ public class StatSheet {
 			
 			System.out.println("|" + nextName + "|" + sRbis + "|" + average + "|");
 		}
+		BoxScore(homeTeam);
 		
 		System.out.println("|----------AWAY TEAM----------|");
 		for (int i = 0; i < awayTeam.size(); i++) {
 			
 			String nextName = awayTeam.get(i).getName();
-			nextName = bufferNames(nextName);
+			nextName = bufferNames(nextName,20);
 			
 			int rbis = awayTeam.get(i).getRbis();
 			String sRbis = setUpRbis(rbis);
@@ -42,14 +43,16 @@ public class StatSheet {
 			int hits = awayTeam.get(i).getHits();
 			int atBats = awayTeam.get(i).getAtBats();
 			
+			
 			String average = setUpBattingAverage(hits,atBats);
 			
 			System.out.println("|" + nextName + "|" + sRbis + "|" + average + "|");
 		}
+		BoxScore(awayTeam);
 	}
 	
-	public String bufferNames(String name) {
-		while (name.length()<20) {
+	public String bufferNames(String name, int buffer) {
+		while (name.length()<buffer) {
 			name += " ";
 		}
 		
@@ -68,6 +71,7 @@ public class StatSheet {
 	
 	public String setUpBattingAverage(int hits, int atBats) {
 		String average = "0.000";
+		if(atBats != 0) {
 		double dHits = hits;
 		double dAtBats = atBats;
 		
@@ -75,6 +79,16 @@ public class StatSheet {
 		
 		double avg = dHits / dAtBats;
 		average = df2.format(avg);
+		}
 		return average;
+	}
+	
+	public String BoxScore(ArrayList<Player> team) {
+		for(int i = 0; i < team.size();  i++) {
+			String playerStat = team.get(i).getName();
+			playerStat = bufferNames(playerStat, 14);
+			System.out.println(playerStat +": " + team.get(i).hitTypes.toString());
+		}
+		return null;
 	}
 }

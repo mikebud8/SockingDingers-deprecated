@@ -1,5 +1,6 @@
 package showdown;
 
+import java.util.ArrayList;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
@@ -16,10 +17,11 @@ public class Player {
 	public int twoBagger = 100;
 	public int triple = 100;
 	public int dinger = 100;
-	NavigableMap<Integer, BasesOnHit> playerStats = new TreeMap<Integer, BasesOnHit>();
+	public NavigableMap<Integer, BasesOnHit> playerStats = new TreeMap<Integer, BasesOnHit>();
 	public int hits = 0;
 	public int atBats = 0;
 	public int rbis = 0;
+	public ArrayList<BasesOnHit> hitTypes = new ArrayList<BasesOnHit>();
 	
 	public Player() {
 	}
@@ -27,7 +29,7 @@ public class Player {
 	public Player(String name, String playerType) {
 		if (playerType.equals("b")) {
 		this.name = name;
-		onBase = 9;
+		onBase = 8;
 		speed = 15;
 		cost = 0;
 		strikeOut = -1;
@@ -202,6 +204,10 @@ public class Player {
 		hits++;
 	}
 	
+	public void addHitType(BasesOnHit ht) {
+		this.hitTypes.add(ht);
+	}
+	
 	@Override
 	public String toString() {
 		String myString = "Strike Out: " + getStrikeOut() + ".\n" +
@@ -216,23 +222,29 @@ public class Player {
 	}
 	
 	public enum BasesOnHit{
-		STRIKEOUT(0),
-		GROUNDOUT(0),
-		FLYOUT(0),
-		WALK(1),
-		SINGLE(1),
-		TWOBAGGER(2),
-		TRIPLE(3),
-		DINGER(4)
+		STRIKEOUT(0, "He/she goes down swinging!"),
+		GROUNDOUT(0, "Grounder to the second baseman."),
+		FLYOUT(0, "Routine fly ball for the centerfielder."),
+		WALK(1, "And he/she walks him/her."),
+		SINGLE(1, "Safe at first."),
+		TWOBAGGER(2, "Stand up double!"),
+		TRIPLE(3, "He slides into third!!"),
+		DINGER(4, "This guy is socking dingers!!!!")
 		;
 		
 		private final int bases;
-		private BasesOnHit(int bases) {
+		private final String comment;
+		private BasesOnHit(int bases, String comment) {
 			this.bases = bases;
+			this.comment = comment;
 		}
 		
 		public int getValue() {
 			return bases;
+		}
+		
+		public String getComment() {
+			return comment;
 		}
 	}
 }

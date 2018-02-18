@@ -10,7 +10,7 @@ public class TestBattle {
 		System.out.println(batter.toString());
 		System.out.println("\n\n" + batter.playerStats.floorEntry(14).getValue().getValue());
 		System.out.println(batter.playerStats.toString() + "\n");
-		showDown.battle(pitcher, batter, 0);
+		showDown.battle(pitcher, batter);
 		//int bases = BasesOnHit.matchName(batter.playerStats.floorEntry(0).getValue());
 		//System.out.println("Total bases is " + bases + ".");
 	}

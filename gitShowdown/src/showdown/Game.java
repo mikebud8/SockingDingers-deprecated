@@ -2,6 +2,8 @@ package showdown;
 
 import java.util.ArrayList;
 
+import showdown.Player.BasesOnHit;
+
 public class Game {
 	public final static int TOP = 0;
 	public final static int BOTTOM = 1;
@@ -22,8 +24,8 @@ public class Game {
 		Showdown showDown = new Showdown();
 
 		int inning = 0;
-		int lastHomePlayerOut = -1;
-		int lastAwayPlayerOut = -1;
+		int nextHomeBatter = 0;
+		int nextAwayBatter = 0;
 		int inningIs = TOP;
 
 		// Make the field
@@ -48,20 +50,21 @@ public class Game {
 				System.out.println("Now entering inning #" + (inning + 1));
 				currentBatters = awayBatters;
 				currentPitcher = homePitcher;
-				batterIndex = (lastAwayPlayerOut + 1);
+				batterIndex = (nextAwayBatter);
 			} else {
 				currentBatters = homeBatters;
 				currentPitcher = awayPitcher;
-				batterIndex = (lastHomePlayerOut + 1);
+				batterIndex = (nextHomeBatter);
 			}
 
 			while (outs < 4) {
 				if (batterIndex == currentBatters.size()) {
 					batterIndex = 0;
 				}
-				int bases = showDown.startDuel(currentPitcher, currentBatters.get(batterIndex), outs);
+				BasesOnHit baseOnHit = showDown.battle(currentPitcher, currentBatters.get(batterIndex));
+				currentBatters.get(batterIndex).addHitType(baseOnHit);
+				int bases = baseOnHit.getValue();
 				currentBatters.get(batterIndex).addAtBats();
-				lastHomePlayerOut = batterIndex;
 
 				if (bases == 0) {
 					outs++;
@@ -75,6 +78,12 @@ public class Game {
 				System.out.println(runsPerInning);
 				batterIndex++;
 			}
+			
+			if (inningIs == TOP) {
+				nextAwayBatter = batterIndex;
+			} else {
+				nextHomeBatter = batterIndex;
+			}
 
 			sb.setScoreByInning(inningIs, inning, runsPerInning);
 
@@ -85,7 +94,7 @@ public class Game {
 				
 				//This is a silly little thing that happens when the home team is winning in the
 				//middle of the 9th inning and they don't actually play their half inning.
-				if (inningIs == BOTTOM && inning == 8 && totalRunsHome > totalRunsAway) {
+				if (/*inningIs == BOTTOM &&*/ inning == 8 && totalRunsHome > totalRunsAway) {
 					sb.setNinthInningHomeWin();
 					inning++;
 				}
@@ -107,6 +116,7 @@ public class Game {
 		sb.getScore();
 		StatSheet ss = new StatSheet(homeBatters, awayBatters);
 		ss.showStatSheet();
+		//ss.BoxScore(homeBatters);
 		
 	}
 
@@ -118,7 +128,7 @@ public class Game {
 		Player Mooch = new Player("Mooch", "b");
 		Player CrackFiend = new Player("Crack Fiend", "b");
 		Player RatTrap = new Player("RatTrap", "b");
-		Player NatalieSpaghetti = new Player("Natalie Spaghetti", "b");
+		Player Natalie = new Player("Natalie", "b");
 		Player KP = new Player("KP", "b");
 		Player Zach = new Player("Zach", "b");
 		Player PaulaSanchez = new Player("Paula Sanchez", "b");
@@ -128,7 +138,7 @@ public class Game {
 		homeBatters.add(Mooch);
 		homeBatters.add(CrackFiend);
 		homeBatters.add(RatTrap);
-		homeBatters.add(NatalieSpaghetti);
+		homeBatters.add(Natalie);
 		homeBatters.add(KP);
 		homeBatters.add(Zach);
 		homeBatters.add(PaulaSanchez);

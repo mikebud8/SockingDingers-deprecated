@@ -19,35 +19,26 @@ public class Showdown {
 
 	Player currentBatter;
 
-	public int battle(Player currentPitcher, Player currentBatter, int outs) {
-		int bases = 0;
-		int outcome;
+	public BasesOnHit battle(Player currentPitcher, Player currentBatter) {
+		int pOutcome;
+		int bOutcome;
 		BasesOnHit baseOnHit;
 		
 		System.out.println(currentPitcher.getName() + " is pitching against " + currentBatter.getName());
 
-		outcome = rollDice(20, 1, currentPitcher.getName());
-		// outcome = 5; //debug
-		System.out.println("Current batters on base is " + currentBatter.getOnBase());
-		if (outcome <= currentBatter.getOnBase()) {
+		pOutcome = rollDice(20, 1, currentPitcher.getName());
+		bOutcome = rollDice(20, 1, currentBatter.getName());
+		
+		if (pOutcome <= currentBatter.getOnBase()) {
 			System.out.println(currentBatter.getName() + "'s Advantage");
-			int bOutcome = rollDice(20, 1, currentBatter.getName());
-			// int bOutcome = 20; //debug hit
-
 			baseOnHit = currentBatter.playerStats.floorEntry(bOutcome).getValue();
-			bases = baseOnHit.getValue();
-			System.out.println("Bases on hit is " + bases);
-
 		} else {
 			System.out.println(currentPitcher.getName() + "'s Advantage");
-			int pOutcome = rollDice(20, 1, currentBatter.getName());
-			// int pOutcome = 2; //debug hit
-
 			baseOnHit = currentPitcher.playerStats.floorEntry(pOutcome).getValue();
-			bases = baseOnHit.getValue();
 		}
-		System.out.println(currentBatter.getName() + " advanced " + bases + " base(s)");
-		return bases;
+		System.out.println(baseOnHit.getComment());
+		System.out.println(currentBatter.getName() + " advanced " + baseOnHit.getValue() + " base(s)");
+		return baseOnHit;
 	}
 
 	public static int rollDice(int dSides, int nDice, String player) {
@@ -63,12 +54,5 @@ public class Showdown {
 			// dTotal = dTotal + randomNum;
 		}
 		return randomNum;
-	}
-
-	public int startDuel(Player batter, Player pitcher, int outs) {
-		currentBatter = batter;
-		currentPitcher = pitcher;
-		int bases = battle(batter, pitcher, outs);
-		return bases;
 	}
 }
