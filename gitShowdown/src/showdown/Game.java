@@ -8,7 +8,6 @@ import showdown.Player.BasesOnHit;
 public class Game {
 	public final static int TOP = 0;
 	public final static int BOTTOM = 1;
-	static Window frame = new Window();
 	
 	public static void main(String[] args) {
 		int outs = 0;
