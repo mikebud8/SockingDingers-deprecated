@@ -9,6 +9,7 @@ public class Player {
 	public int onBase = 0;
 	public int speed = 0;
 	public int cost = 0;
+	public String position = null;
 	public int strikeOut = -1;
 	public int groundOut = 100;
 	public int flyOut = 100;
@@ -32,6 +33,7 @@ public class Player {
 		onBase = 8;
 		speed = 15;
 		cost = 0;
+		position = "B";
 		strikeOut = -1;
 		groundOut = 3;
 		flyOut = 5;
@@ -46,12 +48,23 @@ public class Player {
 			onBase = 2;
 			speed = 15;
 			cost = 0;
+			position = "P";
 			groundOut = 11;
 			flyOut = 16;
 			walk = 18;
 			single = 20;
 			setStats();
 		}
+	}
+	
+	private Object[][] buildStats() {
+	Object[][] data = {{"",onBase},{"speed:",speed},{"Position:", position}};
+	return data;
+	}
+	
+	public Object[][] getCardStats(){
+		Object[][] cardStats = this.buildStats();
+	return cardStats;
 	}
 	
 	public String getName(){
