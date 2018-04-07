@@ -13,11 +13,14 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Color;
 
 public class GameWindow extends JFrame {
-	
-	private JTable pitcherStatTable;
-	private JTable batterStatTable;
 	private Border loweredEtched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 	private JLabel awayBatterName1;
 	private JLabel awayBatterName2;
@@ -40,6 +43,19 @@ public class GameWindow extends JFrame {
 	private JLabel homeBatterName9;
 
 	private JPanel contentPane;
+	private JPanel bigScoreBoard;
+	private JPanel panel_2;
+	private JPanel awayTeamNamePanel;
+	private JPanel panel_4;
+	private JPanel homeTeamNamePanel;
+	private JPanel awayTotalScore;
+	private JPanel homeTotalScore;
+	private JPanel panel_8;
+	private JPanel panel_9;
+	private JLabel lblNewLabel;
+	private JLabel label;
+	private JLabel awayBigScore;
+	private JLabel homeBigScore;
 
 	/**
 	 * Launch the application.
@@ -96,77 +112,59 @@ public class GameWindow extends JFrame {
 		JPanel awayBattingOrderPane = new JPanel();
 		awayBattingOrderPane.setBorder(loweredEtched);
 		awayTeamStuff.add(awayBattingOrderPane);
-		awayBattingOrderPane.setLayout(new GridLayout(0, 2, 2, 2));
-		
-		JLabel awayBatter1 = new JLabel("1:");
-		awayBatter1.setBorder(loweredEtched);
-		awayBattingOrderPane.add(awayBatter1);
+		awayBattingOrderPane.setLayout(new GridLayout(9, 1, 2, 2));
 		
 		awayBatterName1 = new JLabel("Away Batter 1");
+		awayBatterName1.setFont(new Font("Courier New", Font.PLAIN, 12));
+		awayBatterName1.setHorizontalAlignment(SwingConstants.TRAILING);
 		awayBatterName1.setBorder(loweredEtched);
 		awayBattingOrderPane.add(awayBatterName1);
 		
-		JLabel awayBatter2 = new JLabel("2:");
-		awayBatter2.setBorder(loweredEtched);
-		awayBattingOrderPane.add(awayBatter2);
-		
 		awayBatterName2 = new JLabel("Away Batter 2");
+		awayBatterName2.setFont(new Font("Courier New", Font.PLAIN, 12));
+		awayBatterName2.setHorizontalAlignment(SwingConstants.TRAILING);
 		awayBatterName2.setBorder(loweredEtched);
 		awayBattingOrderPane.add(awayBatterName2);
 		
-		JLabel awayBatter3 = new JLabel("3:");
-		awayBatter3.setBorder(loweredEtched);
-		awayBattingOrderPane.add(awayBatter3);
-		
 		awayBatterName3 = new JLabel("Away Batter 3");
+		awayBatterName3.setFont(new Font("Courier New", Font.PLAIN, 12));
+		awayBatterName3.setHorizontalAlignment(SwingConstants.TRAILING);
 		awayBatterName3.setBorder(loweredEtched);
 		awayBattingOrderPane.add(awayBatterName3);
 		
-		JLabel awayBatter4 = new JLabel("4:"); 
-		awayBatter4.setBorder(loweredEtched);
-		awayBattingOrderPane.add(awayBatter4);
-		
 		awayBatterName4 = new JLabel("Away Batter 4");
+		awayBatterName4.setFont(new Font("Courier New", Font.PLAIN, 12));
+		awayBatterName4.setHorizontalAlignment(SwingConstants.TRAILING);
 		awayBatterName4.setBorder(loweredEtched);
 		awayBattingOrderPane.add(awayBatterName4);
 		
-		JLabel awayBatter5 = new JLabel("5:"); 
-		awayBatter5.setBorder(loweredEtched);
-		awayBattingOrderPane.add(awayBatter5);
-		
 		awayBatterName5 = new JLabel("Away Batter 5");
+		awayBatterName5.setFont(new Font("Courier New", Font.PLAIN, 12));
+		awayBatterName5.setHorizontalAlignment(SwingConstants.TRAILING);
 		awayBatterName5.setBorder(loweredEtched);
 		awayBattingOrderPane.add(awayBatterName5);
 		
-		JLabel awayBatter6 = new JLabel("6:");
-		awayBatter6.setBorder(loweredEtched);
-		awayBattingOrderPane.add(awayBatter6);
-		
 		awayBatterName6 = new JLabel("Away Batter 6");
+		awayBatterName6.setFont(new Font("Courier New", Font.PLAIN, 12));
+		awayBatterName6.setHorizontalAlignment(SwingConstants.TRAILING);
 		awayBatterName6.setBorder(loweredEtched);
 		awayBattingOrderPane.add(awayBatterName6);
 		
-		JLabel awayBatter7 = new JLabel("7:");
-		awayBatter7.setBorder(loweredEtched);
-		awayBattingOrderPane.add(awayBatter7);
-		
 		awayBatterName7 = new JLabel("Away Batter 7");
+		awayBatterName7.setFont(new Font("Courier New", Font.PLAIN, 12));
+		awayBatterName7.setHorizontalAlignment(SwingConstants.TRAILING);
 		awayBatterName7.setBorder(loweredEtched);
 		awayBattingOrderPane.add(awayBatterName7);
 		
-		JLabel awayBatter8 = new JLabel("8:"); 
-		awayBatter8.setBorder(loweredEtched);
-		awayBattingOrderPane.add(awayBatter8);
-		
 		awayBatterName8 = new JLabel("Away Batter 8");
+		awayBatterName8.setFont(new Font("Courier New", Font.PLAIN, 12));
+		awayBatterName8.setHorizontalAlignment(SwingConstants.TRAILING);
 		awayBatterName8.setBorder(loweredEtched);
 		awayBattingOrderPane.add(awayBatterName8);
 		
-		JLabel awayBatter9 = new JLabel("9:");
-		awayBatter9.setBorder(loweredEtched);
-		awayBattingOrderPane.add(awayBatter9);
-		
 		awayBatterName9 = new JLabel("Away Batter 9");
+		awayBatterName9.setFont(new Font("Courier New", Font.PLAIN, 12));
+		awayBatterName9.setHorizontalAlignment(SwingConstants.TRAILING);
 		awayBatterName9.setBorder(loweredEtched);
 		awayBattingOrderPane.add(awayBatterName9);
 		
@@ -174,14 +172,128 @@ public class GameWindow extends JFrame {
 		contentPane.add(gameInfoPanel);
 		gameInfoPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		pitcherStatTable = new JTable();
-		gameInfoPanel.add(pitcherStatTable);
+		bigScoreBoard = new JPanel();
+		bigScoreBoard.setBackground(new Color(0, 102, 102));
+		gameInfoPanel.add(bigScoreBoard);
+		GridBagLayout gbl_bigScoreBoard = new GridBagLayout();
+		gbl_bigScoreBoard.columnWidths = new int[]{60, 60, 60, 60, 60};
+		gbl_bigScoreBoard.rowHeights = new int[]{10, 10, 10, 10, 10};
+		gbl_bigScoreBoard.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0};
+		gbl_bigScoreBoard.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0};
+		bigScoreBoard.setLayout(gbl_bigScoreBoard);
+		
+		awayTeamNamePanel = new JPanel();
+		awayTeamNamePanel.setBackground(new Color(0, 153, 153));
+		awayTeamNamePanel.setLayout(null);
+		GridBagConstraints gbc_awayTeamNamePanel = new GridBagConstraints();
+		gbc_awayTeamNamePanel.fill = GridBagConstraints.BOTH;
+		gbc_awayTeamNamePanel.insets = new Insets(4, 4, 2, 2);
+		gbc_awayTeamNamePanel.gridx = 0;
+		gbc_awayTeamNamePanel.gridy = 0;
+		gbc_awayTeamNamePanel.gridwidth = 2;
+		bigScoreBoard.add(awayTeamNamePanel, gbc_awayTeamNamePanel);
+		
+		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(0, 0, 175, 40);
+		lblNewLabel.setFont(new Font("Leelawadee UI", Font.BOLD, 24));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		awayTeamNamePanel.add(lblNewLabel);
+		
+		panel_4 = new JPanel();
+		panel_4.setBackground(new Color(0, 153, 153));
+		panel_4.setLayout(null);
+		GridBagConstraints gbc_panel_4 = new GridBagConstraints();
+		gbc_panel_4.gridheight = 5;
+		gbc_panel_4.insets = new Insets(4, 2, 4, 2);
+		gbc_panel_4.fill = GridBagConstraints.BOTH;
+		gbc_panel_4.gridx = 2;
+		gbc_panel_4.gridy = 0;
+		bigScoreBoard.add(panel_4, gbc_panel_4);
+		
+		homeTeamNamePanel = new JPanel();
+		homeTeamNamePanel.setBackground(new Color(0, 153, 153));
+		homeTeamNamePanel.setLayout(null);
+		GridBagConstraints gbc_homeTeamNamePanel = new GridBagConstraints();
+		gbc_homeTeamNamePanel.gridwidth = 2;
+		gbc_homeTeamNamePanel.insets = new Insets(4, 2, 2, 4);
+		gbc_homeTeamNamePanel.fill = GridBagConstraints.BOTH;
+		gbc_homeTeamNamePanel.gridx = 3;
+		gbc_homeTeamNamePanel.gridy = 0;
+		bigScoreBoard.add(homeTeamNamePanel, gbc_homeTeamNamePanel);
+		
+		label = new JLabel("New label");
+		label.setForeground(Color.WHITE);
+		label.setBounds(0, 0, 180, 40);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Leelawadee UI", Font.BOLD, 24));
+		homeTeamNamePanel.add(label);
+		
+		awayTotalScore = new JPanel();
+		awayTotalScore.setBackground(new Color(0, 153, 153));
+		awayTotalScore.setLayout(null);
+		GridBagConstraints gbc_awayTotalScore = new GridBagConstraints();
+		gbc_awayTotalScore.gridwidth = 2;
+		gbc_awayTotalScore.gridheight = 3;
+		gbc_awayTotalScore.insets = new Insets(2, 4, 2, 2);
+		gbc_awayTotalScore.fill = GridBagConstraints.BOTH;
+		gbc_awayTotalScore.gridx = 0;
+		gbc_awayTotalScore.gridy = 1;
+		bigScoreBoard.add(awayTotalScore, gbc_awayTotalScore);
+		
+		awayBigScore = new JLabel("00");
+		awayBigScore.setForeground(Color.WHITE);
+		awayBigScore.setBackground(Color.BLACK);
+		awayBigScore.setBounds(0, 0, 175, 142);
+		awayBigScore.setHorizontalAlignment(SwingConstants.CENTER);
+		awayBigScore.setFont(new Font("Counter-Strike", Font.BOLD, 50));
+		awayTotalScore.add(awayBigScore);
+		
+		homeTotalScore = new JPanel();
+		homeTotalScore.setForeground(Color.WHITE);
+		homeTotalScore.setBackground(new Color(0, 153, 153));
+		homeTotalScore.setLayout(null);
+		GridBagConstraints gbc_homeTotalScore = new GridBagConstraints();
+		gbc_homeTotalScore.gridwidth = 2;
+		gbc_homeTotalScore.gridheight = 3;
+		gbc_homeTotalScore.insets = new Insets(2, 2, 2, 4);
+		gbc_homeTotalScore.fill = GridBagConstraints.BOTH;
+		gbc_homeTotalScore.gridx = 3;
+		gbc_homeTotalScore.gridy = 1;
+		bigScoreBoard.add(homeTotalScore, gbc_homeTotalScore);
+		
+		homeBigScore = new JLabel("00");
+		homeBigScore.setForeground(Color.WHITE);
+		homeBigScore.setBounds(0, 0, 180, 142);
+		homeBigScore.setHorizontalAlignment(SwingConstants.CENTER);
+		homeBigScore.setFont(new Font("Counter-Strike", Font.BOLD, 50));
+		homeTotalScore.add(homeBigScore);
+		
+		panel_8 = new JPanel();
+		panel_8.setBackground(new Color(0, 153, 153));
+		GridBagConstraints gbc_panel_8 = new GridBagConstraints();
+		gbc_panel_8.gridwidth = 2;
+		gbc_panel_8.insets = new Insets(2, 4, 4, 2);
+		gbc_panel_8.fill = GridBagConstraints.BOTH;
+		gbc_panel_8.gridx = 0;
+		gbc_panel_8.gridy = 4;
+		bigScoreBoard.add(panel_8, gbc_panel_8);
+		
+		panel_9 = new JPanel();
+		panel_9.setBackground(new Color(0, 153, 153));
+		GridBagConstraints gbc_panel_9 = new GridBagConstraints();
+		gbc_panel_9.gridwidth = 2;
+		gbc_panel_9.insets = new Insets(2, 2, 4, 4);
+		gbc_panel_9.fill = GridBagConstraints.BOTH;
+		gbc_panel_9.gridx = 3;
+		gbc_panel_9.gridy = 4;
+		bigScoreBoard.add(panel_9, gbc_panel_9);
 		
 		JPanel buttonPanel = new JPanel();
 		gameInfoPanel.add(buttonPanel);
 		
-		batterStatTable = new JTable();
-		gameInfoPanel.add(batterStatTable);
+		panel_2 = new JPanel();
+		gameInfoPanel.add(panel_2);
 		
 		JPanel homePanel = new JPanel();
 		contentPane.add(homePanel);
@@ -200,75 +312,39 @@ public class GameWindow extends JFrame {
 		JPanel homeBattingOrderPane = new JPanel();
 		homeBattingOrderPane.setBorder(loweredEtched);
 		homeTeamStuff.add(homeBattingOrderPane);
-		homeBattingOrderPane.setLayout(new GridLayout(0, 2, 2, 2));
-		
-		JLabel homeBatter1 = new JLabel("1:");
-		homeBatter1.setBorder(loweredEtched);
-		homeBattingOrderPane.add(homeBatter1);
+		homeBattingOrderPane.setLayout(new GridLayout(9, 1, 2, 2));
 		
 		homeBatterName1 = new JLabel("Home Batter 1");
 		homeBatterName1.setBorder(loweredEtched);
 		homeBattingOrderPane.add(homeBatterName1);
 		
-		JLabel homeBatter2 = new JLabel("2:");
-		homeBatter2.setBorder(loweredEtched);
-		homeBattingOrderPane.add(homeBatter2);
-		
 		homeBatterName2 = new JLabel("Home Batter 2");
 		homeBatterName2.setBorder(loweredEtched);
 		homeBattingOrderPane.add(homeBatterName2);
-		
-		JLabel homeBatter3 = new JLabel("3:");
-		homeBatter3.setBorder(loweredEtched);
-		homeBattingOrderPane.add(homeBatter3);
 		
 		homeBatterName3 = new JLabel("Home Batter 3");
 		homeBatterName3.setBorder(loweredEtched);
 		homeBattingOrderPane.add(homeBatterName3);
 		
-		JLabel homeBatter4 = new JLabel("4:");
-		homeBatter4.setBorder(loweredEtched);
-		homeBattingOrderPane.add(homeBatter4);
-		
 		homeBatterName4 = new JLabel("Home Batter 4");
 		homeBatterName4.setBorder(loweredEtched);
 		homeBattingOrderPane.add(homeBatterName4);
-		
-		JLabel homeBatter5 = new JLabel("5:");
-		homeBatter5.setBorder(loweredEtched);
-		homeBattingOrderPane.add(homeBatter5);
 		
 		homeBatterName5 = new JLabel("Home Batter 5");
 		homeBatterName5.setBorder(loweredEtched);
 		homeBattingOrderPane.add(homeBatterName5);
 		
-		JLabel homeBatter6 = new JLabel("6:");
-		homeBatter6.setBorder(loweredEtched);
-		homeBattingOrderPane.add(homeBatter6);
-		
 		homeBatterName6 = new JLabel("Home Batter 6");
 		homeBatterName6.setBorder(loweredEtched);
 		homeBattingOrderPane.add(homeBatterName6);
-		
-		JLabel homeBatter7 = new JLabel("7:");
-		homeBatter7.setBorder(loweredEtched);
-		homeBattingOrderPane.add(homeBatter7);
 		
 		homeBatterName7 = new JLabel("Home Batter 7");
 		homeBatterName7.setBorder(loweredEtched);
 		homeBattingOrderPane.add(homeBatterName7);
 		
-		JLabel homeBatter8 = new JLabel("8:");
-		homeBatter8.setBorder(loweredEtched);
-		homeBattingOrderPane.add(homeBatter8);
-		
 		homeBatterName8 = new JLabel("Home Batter 8");
 		homeBatterName8.setBorder(loweredEtched);
 		homeBattingOrderPane.add(homeBatterName8);
-		
-		JLabel homeBatter9 = new JLabel("9:");
-		homeBatter9.setBorder(loweredEtched);
-		homeBattingOrderPane.add(homeBatter9);
 		
 		homeBatterName9 = new JLabel("Home Batter 9");
 		homeBatterName9.setBorder(loweredEtched);
@@ -280,27 +356,32 @@ public class GameWindow extends JFrame {
 	}
 	
 	public void setAwayBattingOrderTable(BattingOrder awayBO) {
-		awayBatterName1.setText(awayBO.nextBatter());
-		awayBatterName2.setText(awayBO.nextBatter());
-		awayBatterName3.setText(awayBO.nextBatter());
-		awayBatterName4.setText(awayBO.nextBatter());
-		awayBatterName5.setText(awayBO.nextBatter());
-		awayBatterName6.setText(awayBO.nextBatter());
-		awayBatterName7.setText(awayBO.nextBatter());
-		awayBatterName8.setText(awayBO.nextBatter());
-		awayBatterName9.setText(awayBO.nextBatter());
+		awayBatterName1.setText(awayBO.nextBatter() + "  ");
+		awayBatterName2.setText(awayBO.nextBatter() + "  ");
+		awayBatterName3.setText(awayBO.nextBatter() + "  ");
+		awayBatterName4.setText(awayBO.nextBatter() + "  ");
+		awayBatterName5.setText(awayBO.nextBatter() + "  ");
+		awayBatterName6.setText(awayBO.nextBatter() + "  ");
+		awayBatterName7.setText(awayBO.nextBatter() + "  ");
+		awayBatterName8.setText(awayBO.nextBatter() + "  ");
+		awayBatterName9.setText(awayBO.nextBatter() + "  ");
 	}
 	
 	public void setHomeBattingOrderTable(BattingOrder homeBO) {
-		homeBatterName1.setText(homeBO.nextBatter());
-		homeBatterName2.setText(homeBO.nextBatter());
-		homeBatterName3.setText(homeBO.nextBatter());
-		homeBatterName4.setText(homeBO.nextBatter());
-		homeBatterName5.setText(homeBO.nextBatter());
-		homeBatterName6.setText(homeBO.nextBatter());
-		homeBatterName7.setText(homeBO.nextBatter());
-		homeBatterName8.setText(homeBO.nextBatter());
-		homeBatterName9.setText(homeBO.nextBatter());
+		homeBatterName1.setText("  " + homeBO.nextBatter());
+		homeBatterName2.setText("  " + homeBO.nextBatter());
+		homeBatterName3.setText("  " + homeBO.nextBatter());
+		homeBatterName4.setText("  " + homeBO.nextBatter());
+		homeBatterName5.setText("  " + homeBO.nextBatter());
+		homeBatterName6.setText("  " + homeBO.nextBatter());
+		homeBatterName7.setText("  " + homeBO.nextBatter());
+		homeBatterName8.setText("  " + homeBO.nextBatter());
+		homeBatterName9.setText("  " + homeBO.nextBatter());
+	}
+	
+	public void setScores(int awayScore, int homeScore) {
+		awayBigScore.setText(awayScore + "");
+		homeBigScore.setText(homeScore + "");
 	}
 
 }

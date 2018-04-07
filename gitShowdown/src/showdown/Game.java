@@ -8,24 +8,13 @@ import showdown.Player.BasesOnHit;
 public class Game {
 	public final static int TOP = 0;
 	public final static int BOTTOM = 1;
+	public BattingOrder homeBO;
+	public BattingOrder awayBO;
 	
 	public static void main(String[] args) {
 		
 		GameWindow gw = new GameWindow();
-		
-		String hbo_1 = "hbo_1";
-		String hbo_2 = "hbo_2";
-		String hbo_3 = "hbo_3";
-		String hbo_4 = "hbo_4";
-		String hbo_5 = "hbo_5";
-		String hbo_6 = "hbo_6";
-		String hbo_7 = "hbo_7";
-		String hbo_8 = "hbo_8";
-	    String hbo_9 = "hbo_9";
 
-		BattingOrder homeBO = new BattingOrder(hbo_1, hbo_2, hbo_3, hbo_4, hbo_5, hbo_6, hbo_7, hbo_8, hbo_9);
-		
-		gw.setAwayBattingOrderTable(homeBO);
 		gw.setVisible(true);
 		
 		int outs = 0;
@@ -54,6 +43,31 @@ public class Game {
 		// Make the Batters
 		homeBatters = makeHomeBatters();
 		awayBatters = makeAwayBatters();
+		
+		BattingOrder homeBO = new BattingOrder(homeBatters.get(0).name,
+				   							   homeBatters.get(1).name,
+				   							   homeBatters.get(2).name,
+				   							   homeBatters.get(3).name,
+				   							   homeBatters.get(4).name,
+				   							   homeBatters.get(5).name,
+				   							   homeBatters.get(6).name,
+				   							   homeBatters.get(7).name,
+				   							   homeBatters.get(8).name);
+		
+		BattingOrder awayBO = new BattingOrder(awayBatters.get(0).name,
+				  							   awayBatters.get(1).name,
+				  							   awayBatters.get(2).name,
+				  							   awayBatters.get(3).name,
+				  							   awayBatters.get(4).name,
+				  							   awayBatters.get(5).name,
+				  							   awayBatters.get(6).name,
+				  							   awayBatters.get(7).name,
+				  							   awayBatters.get(8).name);
+		
+		gw.setAwayBattingOrderTable(awayBO);
+		gw.setHomeBattingOrderTable(homeBO);
+		
+		
 		Player homePitcher = getHomePitcher();
 		Player awayPitcher = getAwayPitcher();
 		int batterIndex = 0;
@@ -129,8 +143,9 @@ public class Game {
 			f.resetField();
 			outs = 0;
 			runsPerInning = 0;
+			gw.setScores(totalRunsAway, totalRunsHome);
 		}
-
+		
 		System.out.println("|---------FINAL SCORE---------|");
 		sb.getScore();
 		StatSheet ss = new StatSheet(homeBatters, awayBatters);
@@ -186,6 +201,7 @@ public class Game {
 		awayBatters.add(Dides);
 		awayBatters.add(Steggy);
 		awayBatters.add(Evvy);
+		
 
 		return awayBatters;
 	}
