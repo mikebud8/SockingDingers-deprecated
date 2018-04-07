@@ -10,6 +10,24 @@ public class Game {
 	public final static int BOTTOM = 1;
 	
 	public static void main(String[] args) {
+		
+		GameWindow gw = new GameWindow();
+		
+		String hbo_1 = "hbo_1";
+		String hbo_2 = "hbo_2";
+		String hbo_3 = "hbo_3";
+		String hbo_4 = "hbo_4";
+		String hbo_5 = "hbo_5";
+		String hbo_6 = "hbo_6";
+		String hbo_7 = "hbo_7";
+		String hbo_8 = "hbo_8";
+	    String hbo_9 = "hbo_9";
+
+		BattingOrder homeBO = new BattingOrder(hbo_1, hbo_2, hbo_3, hbo_4, hbo_5, hbo_6, hbo_7, hbo_8, hbo_9);
+		
+		gw.setAwayBattingOrderTable(homeBO);
+		gw.setVisible(true);
+		
 		int outs = 0;
 		int totalRunsHome = 0;
 		int totalRunsAway = 0;
