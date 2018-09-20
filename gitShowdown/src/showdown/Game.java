@@ -8,15 +8,15 @@ import showdown.Player.BasesOnHit;
 public class Game {
 	public final static int TOP = 0;
 	public final static int BOTTOM = 1;
-	public BattingOrder homeBO;
-	public BattingOrder awayBO;
-	
+	//public BattingOrder homeBatters;
+	//public BattingOrder awayBatters;
+
 	public static void main(String[] args) {
-		
+
 		GameWindow gw = new GameWindow();
 
 		gw.setVisible(true);
-		
+
 		int outs = 0;
 		int totalRunsHome = 0;
 		int totalRunsAway = 0;
@@ -24,10 +24,14 @@ public class Game {
 		Scoreboard sb = new Scoreboard();
 		sb.getScore();
 
-		ArrayList<Player> homeBatters;
-		ArrayList<Player> awayBatters;
+		//ArrayList<Player> homeBatters;
+		//ArrayList<Player> awayBatters;
 
-		ArrayList<Player> currentBatters = new ArrayList<Player>();
+		BattingOrder homeBatters;
+		BattingOrder awayBatters;
+
+		BattingOrder currentBatters;
+		Player crntBtr = new Player();
 		Player currentPitcher = new Player();
 		Showdown showDown = new Showdown();
 
@@ -43,31 +47,11 @@ public class Game {
 		// Make the Batters
 		homeBatters = makeHomeBatters();
 		awayBatters = makeAwayBatters();
+
+		gw.setAwayBattingOrderTable(awayBatters);
+		gw.setHomeBattingOrderTable(homeBatters);
 		
-		BattingOrder homeBO = new BattingOrder(homeBatters.get(0).name,
-				   							   homeBatters.get(1).name,
-				   							   homeBatters.get(2).name,
-				   							   homeBatters.get(3).name,
-				   							   homeBatters.get(4).name,
-				   							   homeBatters.get(5).name,
-				   							   homeBatters.get(6).name,
-				   							   homeBatters.get(7).name,
-				   							   homeBatters.get(8).name);
-		
-		BattingOrder awayBO = new BattingOrder(awayBatters.get(0).name,
-				  							   awayBatters.get(1).name,
-				  							   awayBatters.get(2).name,
-				  							   awayBatters.get(3).name,
-				  							   awayBatters.get(4).name,
-				  							   awayBatters.get(5).name,
-				  							   awayBatters.get(6).name,
-				  							   awayBatters.get(7).name,
-				  							   awayBatters.get(8).name);
-		
-		gw.setAwayBattingOrderTable(awayBO);
-		gw.setHomeBattingOrderTable(homeBO);
-		
-		
+
 		Player homePitcher = getHomePitcher();
 		Player awayPitcher = getAwayPitcher();
 		int batterIndex = 0;
@@ -83,40 +67,48 @@ public class Game {
 				System.out.println("Now entering inning #" + (inning + 1));
 				currentBatters = awayBatters;
 				currentPitcher = homePitcher;
-				batterIndex = (nextAwayBatter);
+			//	batterIndex = nextAwayBatter;
 			} else {
 				currentBatters = homeBatters;
 				currentPitcher = awayPitcher;
-				batterIndex = (nextHomeBatter);
+			//	batterIndex = nextHomeBatter;
 			}
-
+/*			while (inning < 22) {
+			if (!homeBatters.itrHasNext()) {
+				crntBtr = homeBatters.loopBackToFirstSpot();
+			}else {
+				crntBtr = homeBatters.nextBatter();
+			}*/
 			while (outs < 4) {
-				if (batterIndex == currentBatters.size()) {
-					batterIndex = 0;
+				if (!currentBatters.itrHasNext()) {
+					crntBtr = currentBatters.loopBackToFirstSpot();
+				}else {
+				crntBtr = currentBatters.nextBatter();
 				}
-				BasesOnHit baseOnHit = showDown.battle(currentPitcher, currentBatters.get(batterIndex));
-				currentBatters.get(batterIndex).addHitType(baseOnHit);
+				BasesOnHit baseOnHit = showDown.battle(currentPitcher, crntBtr);
+				crntBtr.addHitType(baseOnHit);
 				int bases = baseOnHit.getValue();
-				currentBatters.get(batterIndex).addAtBats();
+				crntBtr.addAtBats();
 
 				if (bases == 0) {
 					outs++;
 				} else {
 					runsScored = f.hit(bases);
-					currentBatters.get(batterIndex).addHits();
-					currentBatters.get(batterIndex).addRbis(runsScored);
+					crntBtr.addHits();
+					crntBtr.addRbis(runsScored);
 				}
 				runsPerInning += runsScored;
 				runsScored = 0;
 				System.out.println(runsPerInning);
-				batterIndex++;
+				//currentBatters.nextBatter();
+				//batterIndex++;
 			}
-			
-			if (inningIs == TOP) {
+
+/*			if (inningIs == TOP) {
 				nextAwayBatter = batterIndex;
 			} else {
 				nextHomeBatter = batterIndex;
-			}
+			}*/
 
 			sb.setScoreByInning(inningIs, inning, runsPerInning);
 
@@ -124,7 +116,7 @@ public class Game {
 				totalRunsAway += runsPerInning;
 				sb.setTotalScore(inningIs, inning, totalRunsAway);
 				inningIs = BOTTOM;
-				
+
 				//This is a silly little thing that happens when the home team is winning in the
 				//middle of the 9th inning and they don't actually play their half inning.
 				if (/*inningIs == BOTTOM &&*/ inning == 8 && totalRunsHome > totalRunsAway) {
@@ -145,18 +137,17 @@ public class Game {
 			runsPerInning = 0;
 			gw.setScores(totalRunsAway, totalRunsHome);
 		}
-		
+
 		System.out.println("|---------FINAL SCORE---------|");
 		sb.getScore();
 		StatSheet ss = new StatSheet(homeBatters, awayBatters);
 		ss.showStatSheet();
 		//ss.BoxScore(homeBatters);
-		
-	}
 
+	}
+	//TODO update this t
 	// these are all garbage methods just to tweak player names for now
-	public static ArrayList<Player> makeHomeBatters() {
-		ArrayList<Player> homeBatters = new ArrayList<Player>();
+	public static BattingOrder makeHomeBatters() {
 		Player Mitts = new Player("Mitts", "b");
 		Player James = new Player("James", "b");
 		Player Mooch = new Player("Mooch", "b");
@@ -167,21 +158,12 @@ public class Game {
 		Player Zach = new Player("Zach", "b");
 		Player PaulaSanchez = new Player("Paula Sanchez", "b");
 
-		homeBatters.add(Mitts);
-		homeBatters.add(James);
-		homeBatters.add(Mooch);
-		homeBatters.add(CrackFiend);
-		homeBatters.add(RatTrap);
-		homeBatters.add(Natalie);
-		homeBatters.add(KP);
-		homeBatters.add(Zach);
-		homeBatters.add(PaulaSanchez);
+		BattingOrder homeBO = new BattingOrder(Mitts, James, Mooch, CrackFiend, RatTrap, Natalie, KP, Zach, PaulaSanchez);
 
-		return homeBatters;
+		return homeBO;
 	}
 
-	public static ArrayList<Player> makeAwayBatters() {
-		ArrayList<Player> awayBatters = new ArrayList<Player>();
+	public static BattingOrder makeAwayBatters() {
 		Player Deano = new Player("Deano", "b");
 		Player Mikebud = new Player("Mikebud", "b");
 		Player StoneCleave = new Player("StoneCleave", "b");
@@ -192,18 +174,9 @@ public class Game {
 		Player Steggy = new Player("Steggy", "b");
 		Player Evvy = new Player("Evvy", "b");
 
-		awayBatters.add(Deano);
-		awayBatters.add(Mikebud);
-		awayBatters.add(StoneCleave);
-		awayBatters.add(BigOwen);
-		awayBatters.add(Lex);
-		awayBatters.add(BigToni);
-		awayBatters.add(Dides);
-		awayBatters.add(Steggy);
-		awayBatters.add(Evvy);
-		
+		BattingOrder awayBO = new BattingOrder(Deano, Mikebud, StoneCleave, BigOwen, Lex, BigToni, Dides, Steggy, Evvy);
 
-		return awayBatters;
+		return awayBO;
 	}
 
 	public static Player getHomePitcher() {

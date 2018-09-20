@@ -4,26 +4,27 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class StatSheet {
-	ArrayList<Player> homeTeam;
-	ArrayList<Player> awayTeam;
+	BattingOrder homeTeam;
+	BattingOrder awayTeam;
 	
-	public StatSheet(ArrayList<Player> homeTeam, ArrayList<Player> awayTeam) {
-		this.homeTeam = homeTeam;
-		this.awayTeam = awayTeam;
+	public StatSheet(BattingOrder homeBatters, BattingOrder awayBatters) {
+		this.homeTeam = homeBatters;
+		this.awayTeam = awayBatters;
 	}
 	
 	public void showStatSheet() {
 		System.out.println("|----------HOME TEAM----------|");
-		for (int i = 0; i < homeTeam.size(); i++) {
+		System.out.println("|Player             |RBI|Avg. |");
+		for (int i = 0; i < homeTeam.getOrder().size(); i++) {
 			
-			String nextName = homeTeam.get(i).getName();
-			nextName = bufferNames(nextName,20);
+			String nextName = homeTeam.getOrder().get(i).getName();
+			nextName = bufferNames(nextName,19);
 			
-			int rbis = homeTeam.get(i).getRbis();
+			int rbis = homeTeam.getOrder().get(i).getRbis();
 			String sRbis = setUpRbis(rbis);
 			
-			int hits = homeTeam.get(i).getHits();
-			int atBats = homeTeam.get(i).getAtBats();
+			int hits = homeTeam.getOrder().get(i).getHits();
+			int atBats = homeTeam.getOrder().get(i).getAtBats();
 			
 			String average = setUpBattingAverage(hits,atBats);
 			
@@ -32,16 +33,17 @@ public class StatSheet {
 		BoxScore(homeTeam);
 		
 		System.out.println("|----------AWAY TEAM----------|");
-		for (int i = 0; i < awayTeam.size(); i++) {
+		System.out.println("|Player             |RBI|Avg. |");
+		for (int i = 0; i < awayTeam.getOrder().size(); i++) {
 			
-			String nextName = awayTeam.get(i).getName();
-			nextName = bufferNames(nextName,20);
+			String nextName = awayTeam.getOrder().get(i).getName();
+			nextName = bufferNames(nextName,19);
 			
-			int rbis = awayTeam.get(i).getRbis();
+			int rbis = awayTeam.getOrder().get(i).getRbis();
 			String sRbis = setUpRbis(rbis);
 			
-			int hits = awayTeam.get(i).getHits();
-			int atBats = awayTeam.get(i).getAtBats();
+			int hits = awayTeam.getOrder().get(i).getHits();
+			int atBats = awayTeam.getOrder().get(i).getAtBats();
 			
 			
 			String average = setUpBattingAverage(hits,atBats);
@@ -63,7 +65,7 @@ public class StatSheet {
 		String sRbis = Integer.toString(rbis);
 		
 		if (rbis < 10) {
-			sRbis = " " + (Integer.toString(rbis));
+			sRbis = "  " + (Integer.toString(rbis));
 		} 
 
 		return sRbis;

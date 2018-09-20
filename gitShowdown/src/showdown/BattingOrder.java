@@ -1,15 +1,19 @@
 package showdown;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
-public class BattingOrder {
-	public LinkedList<String> order = new LinkedList<String>();
-	public Iterator<String> itr;
+public class BattingOrder extends ArrayList<Player>{
+	private List<Player> order = new ArrayList<Player>();
+	public Iterator<Player> itr;
+	private Player currentBatter = null;
 	
-	public BattingOrder(String bo_1, String bo_2, String bo_3,String bo_4,
-			String bo_5, String bo_6, String bo_7, String bo_8, String bo_9) {
+	public BattingOrder(Player bo_1, Player bo_2, Player bo_3,Player bo_4,
+			Player bo_5, Player bo_6, Player bo_7, Player bo_8, Player bo_9) {
 		order.add(bo_1);
+		System.out.println(bo_1.getName());
 		order.add(bo_2);
 		order.add(bo_3);
 		order.add(bo_4);
@@ -19,18 +23,30 @@ public class BattingOrder {
 		order.add(bo_8);
 		order.add(bo_9);
 		itr = order.iterator();
+		
+
+		currentBatter = bo_1;
 	}
 	
-	public String nextBatter() {
-		return itr.next();
+	public Player nextBatter() {
+		return currentBatter = itr.next();
 	}
 	
 	public Boolean itrHasNext() {
 		return itr.hasNext();
 	}
 	
-	public String loopBackToFirstSpot() {
+	public Player loopBackToFirstSpot() {
 		itr = order.iterator();
-		return itr.next();
+		currentBatter = itr.next();
+		return currentBatter;
+	}
+	
+	public Player getCurrentBatter() {
+		return currentBatter;
+	}
+	
+	public List<Player> getOrder(){
+		return order;
 	}
 }
