@@ -22,6 +22,10 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 
 public class GameWindow extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Border loweredEtched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 	private JLabel awayBatterName1;
 	private JLabel awayBatterName2;
@@ -899,7 +903,6 @@ public class GameWindow extends JFrame {
 		awayBatterName7.setText(awayBO.nextBatter().name+ "  ");
 		awayBatterName8.setText(awayBO.nextBatter().name+ "  ");
 		awayBatterName9.setText(awayBO.nextBatter().name+ "  ");
-		//awayBO.loopBackToFirstSpot();
 	}
 	
 	public void setHomeBattingOrderTable(BattingOrder homeBO) {
@@ -912,7 +915,6 @@ public class GameWindow extends JFrame {
 		homeBatterName7.setText("  " + homeBO.nextBatter().name);
 		homeBatterName8.setText("  " + homeBO.nextBatter().name);
 		homeBatterName9.setText("  " + homeBO.nextBatter().name);
-		//homeBO.loopBackToFirstSpot();
 	}
 	
 	public void setScores(int awayScore, int homeScore) {

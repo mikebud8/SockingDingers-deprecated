@@ -1,8 +1,5 @@
 package showdown;
 
-import java.awt.EventQueue;
-import java.util.ArrayList;
-
 import showdown.Player.BasesOnHit;
 
 public class Game {
@@ -36,8 +33,6 @@ public class Game {
 		Showdown showDown = new Showdown();
 
 		int inning = 0;
-		int nextHomeBatter = 0;
-		int nextAwayBatter = 0;
 		int inningIs = TOP;
 
 		// Make the field
@@ -54,8 +49,7 @@ public class Game {
 
 		Player homePitcher = getHomePitcher();
 		Player awayPitcher = getAwayPitcher();
-		int batterIndex = 0;
-
+		
 		while (inning < 9) {
 			int runsScored = 0;
 			int runsPerInning = 0;
